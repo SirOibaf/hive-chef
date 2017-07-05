@@ -37,9 +37,8 @@ bash 'extract-slider' do
         group node.slider.group
         code <<-EOH
                 set -e
-                mkdir /tmp/apache-slider-#{node.slider.version}
                 tar zxf #{cached_package_filename} -C /tmp
-                mv /tmp/slider-#{node.slider.version}-incubating #{node.slider.dir}
+                mv /tmp/slider-#{node.slider.version}-incubating #{node.slider.home}
                 # remove old symbolic link, if any
                 rm -f #{node.slider.base_dir}
                 ln -s #{node.slider.home} #{node.slider.base_dir}
