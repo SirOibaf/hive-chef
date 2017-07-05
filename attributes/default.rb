@@ -14,6 +14,7 @@ default.hive2.home                    = node.hive2.dir + "/apache-hive-" + node.
 default.hive2.base_dir                = node.hive2.dir + "/apache-hive"
 default.hive2.keystore                = "#{node.kagent.base_dir}/node_server_keystore.jks"
 default.hive2.keystore_password       = "changeit"
+default.hive2.execution_mode          = "llap"
 
 default.hive2.mysql_user              = "hive"
 default.hive2.mysql_password          = "hive"
@@ -39,6 +40,24 @@ default.tez.home                    =  node.tez.dir + "/apache-tez-" + node.tez.
 default.tez.base_dir                =  node.tez.dir + "/apache-tez"
 default.tez.hopsfs_dir              = "/apps/tez"
 default.tez.conf_dir                =  node.tez.base_dir + "/conf"
+
+default.slider.user                    =  node.install.user.empty? ? "slider" : node.install.user
+default.slider.group                   =  node.hops.group
+default.slider.version                 = "0.92.0"
+default.slider.url                     = "#{node.download_url}/slider-#{node.slider.version}-incubating-all.tar.gz"
+default.slider.dir                     =  node.install.dir.empty? ? "/srv" : node.install.dir
+default.slider.home                    =  node.slider.dir + "/apache-slider-" + node.slider.version
+default.slider.base_dir                =  node.slider.dir + "/apache-slider"
+
+default.llap.cluster_name         = "llap-cluster"
+default.llap.instance_size        = "3072"
+default.llap.instance_headroom    = "256"
+default.llap.instance_vcores      = "2"
+default.llap.num_instances        = "2"
+default.llap.num_executors        = "2"
+default.llap.executors_memory     = "1024"
+default.llap.io_cache             = "1024"
+default.llap.execution_mode       = "auto"
 
 #default.hive2.metastore.public_ips                   = ['']
 #default.hive2.metastore.private_ips                  = ['']
