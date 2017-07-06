@@ -50,6 +50,11 @@ bash 'extract-slider' do
      not_if { ::File.exists?( "#{slider_downloaded}" ) }
 end
 
+# Export Slider HOME
+magic_shell_environment 'SLIDER_HOME' do
+  value "#{node.slider.base_dir}"
+end
+
 # Add Slider to PATH
 magic_shell_environment 'PATH' do
   value "$PATH:#{node.slider.base_dir}/bin"
@@ -61,7 +66,7 @@ bash 'launch-llap' do
         group node.hive2.group
         code <<-EOH
                 set -e
-                #{node.hive2.base_dir}/bin/hive --service llap --name #{node.llap.cluster_name} --output #{node.hive2.base_dir}/bin/llap -z
+        #{node.hive2.base_dir}/bin/hive --service llap --name #{node.llap.cluster_name} --output #{node.hive2.base_dir}/bin/llap --instances #{node.llap.num_instances} -z
         EOH
         not_if { ::File.exists?( "#{node.hive2.base_dir}/bin/llap" ) || node.hive2.execution_mode == "container" }
 end
