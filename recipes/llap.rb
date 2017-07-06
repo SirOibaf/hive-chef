@@ -65,8 +65,9 @@ bash 'launch-llap' do
         user node.hive2.user
         group node.hive2.group
         code <<-EOH
-                set -e
-        #{node.hive2.base_dir}/bin/hive --service llap --name #{node.llap.cluster_name} --output #{node.hive2.base_dir}/bin/llap --instances #{node.llap.num_instances} -z
+           set -e
+           export SLIDER_HOME=#{node.slider.base_dir}
+           #{node.hive2.base_dir}/bin/hive --service llap --name #{node.llap.cluster_name} --output #{node.hive2.base_dir}/bin/llap --instances #{node.llap.num_instances} -z
         EOH
         not_if { ::File.exists?( "#{node.hive2.base_dir}/bin/llap" ) || node.hive2.execution_mode == "container" }
 end
