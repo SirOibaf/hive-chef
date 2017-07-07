@@ -67,6 +67,7 @@ bash 'launch-llap' do
         code <<-EOH
            set -e
            export SLIDER_HOME=#{node.slider.base_dir}
+           export HADOOP_HOME=#{node.hops.base_dir}
            #{node.hive2.base_dir}/bin/hive --service llap --name #{node.llap.cluster_name} --output #{node.hive2.base_dir}/bin/llap --instances #{node.llap.num_instances} -z
         EOH
         not_if { ::File.exists?( "#{node.hive2.base_dir}/bin/llap" ) || node.hive2.execution_mode == "container" }
