@@ -42,6 +42,10 @@ default['tez']['base_dir']                =  node['tez']['dir'] + "/apache-tez"
 default['tez']['hopsfs_dir']              = "/apps/tez"
 default['tez']['conf_dir']                =  node['tez']['base_dir'] + "/conf"
 
+# Tez performance settings
+default['tez']['exec_vcores']                =  "2"
+default['tez']['exec_memory']                =  "2048"
+
 default['slider']['user']                    =  node['install']['user'].empty? ? "slider" : node['install']['user']
 default['slider']['group']                   =  node['hops']['group']
 default['slider']['version']                 = "0.93.0-incubating-SNAPSHOT"

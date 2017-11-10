@@ -2177,12 +2177,12 @@
   </property>
   <property>
     <name>hive.tez.container.size</name>
-    <value>-1</value>
+    <value><%= node['tez']['exec_memory'] %></value>
     <description>By default Tez will spawn containers of the size of a mapper. This can be used to overwrite.</description>
   </property>
   <property>
     <name>hive.tez.cpu.vcores</name>
-    <value>2</value>
+    <value><%= node['tez']['exec_vcores'] %></value>
     <description>
       By default Tez will ask for however many cpus map-reduce is configured to use per container.
       This can be used to overwrite.
@@ -4462,7 +4462,7 @@
   </property>
   <property>
     <name>hive.vectorized.execution.enabled</name>
-    <value>false</value>
+    <value>true</value>
     <description>
       This flag should be set to true to enable vectorized mode of query execution.
       The default value is false.

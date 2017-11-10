@@ -96,3 +96,11 @@ attribute "install/dir",
 attribute "install/user",
           :description => "User to install the services as",
           :type => "string"
+
+attribute "tez/exec_vcores",
+          :description => "The number of vcores assigned to each Tez executor",
+          :type => "string"
+
+attribute "tez/exec_memory",
+          :description => "The megabytes of memory assigned to each Tez executor",
+          :type => "string"
