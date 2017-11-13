@@ -134,3 +134,14 @@ template "#{node['hive2']['base_dir']}/conf/hive-env.sh" do
   group node['hive2']['group']
   mode 0655
 end
+
+# Register Hive as HopsWorks service
+bash 'set_hive_as_enabled' do
+  user "root"
+  group "root"
+  code <<-EOH
+    #{node['ndb']['scripts_dir']}/mysql-client.sh -e \"INSERT INTO hopsworks.variables values('hive_enabled', 'true')\"
+  EOH
+  not_if "#{node['ndb']['scripts_dir']}/mysql-client.sh -e \"SELECT * FROM hopsworks.variables WHERE id='hive_enabled'\" | grep hive_enabled"
+end
+
