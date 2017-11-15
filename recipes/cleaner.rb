@@ -46,6 +46,16 @@ template "/etc/environment_cleaner" do
   mode 0664
 end
 
+bash "append_hadoop_classpath" do
+  user "root"
+  group "root"
+  code <<-EOH
+    printf "CLASSPATH=" >> /etc/environment_cleaner
+    #{node['hops']['bin_dir']}/hadoop classpath -glob >> /etc/environment_cleaner
+  EOH
+  not_if "cat /etc/environment_cleaner | grep CLASSPATH"
+end
+
 service_name="hivecleaner"
 case node['platform_family']
 when "rhel"
@@ -81,7 +91,7 @@ end
 
 if node['kagent']['enabled'] == "true"
    kagent_config service_name do
-     service service_name
+     service "Hive"
      log_file node['hive2']['logs_dir'] + "/hivecleaner.log"
    end
 end
