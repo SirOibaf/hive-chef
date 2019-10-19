@@ -17,13 +17,13 @@ depends          "java"
 depends          "kzookeeper"
 depends          "magic_shell"
 
-recipe           "install", "Installs a Hive2 Server"
-recipe           "default", "Starts both a Hive metastore and server2 and tez"
-recipe           "metastore", "Starts  a Hive Metastore Server"
-recipe           "server2", "Starts  a Hive Server2"
-recipe           "tez", "Install Tez"
-recipe           "llap", "Deploy LLAP daemons"
-recipe           "purge", "Removes and deletes an installed Hive Server"
+recipe           "hive2::install", "Installs a Hive2 Server"
+recipe           "hive2::default", "Starts both a Hive metastore and server2 and tez"
+recipe           "hive2::metastore", "Starts  a Hive Metastore Server"
+recipe           "hive2::server2", "Starts  a Hive Server2"
+recipe           "hive2::tez", "Install Tez"
+recipe           "hive2::llap", "Deploy LLAP daemons"
+recipe           "hive2::purge", "Removes and deletes an installed Hive Server"
 
 attribute "hive2/user",
           :description => "User to install/run as",
